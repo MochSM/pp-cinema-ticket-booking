@@ -1,24 +1,18 @@
 'use strict';
 
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-  },
 
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+let data = require("../data/movies.json")
+data.forEach(el => {
+  el.createdAt = new Date()
+  el.updatedAt = new Date()
+})
+console.log (data)
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+      return queryInterface.bulkInsert("Movies", data, {})
+  },
+  down: (queryInterface, Sequelize) => {
+      return queryInterface.bulkDelete("Movies", null, {})
   }
 };
