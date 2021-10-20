@@ -1,7 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,16 +11,63 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.ChatRoom)
     }
   };
   User.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      unique: {
+        args: true,
+        msg: "Username already in use, please choose a different username or login!"
+      },
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Username, must be filled!"
+        },
+      },
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: {
+        args: true,
+        msg: "Email already in use, please choose a different email or login!"
+      },
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Email, must be filled!"
+        },
+        isEmail: {
+          args: true,
+          msg: "Please use right email!"
+        },
+      },
+    },
     role: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Password, must be filled!"
+        },
+        len: {
+          args: [8, 16],
+          msg: "Password must between 8 and 16"
+        }
+      },
+    }
   }, {
     sequelize,
     modelName: 'User',
+    hooks: {
+      beforeCreate: (instance) => {
+        instance.password = bcrypt.hashSync(instance.password, bcrypt.genSaltSync(5));
+        instance.role = 'user'
+      },
+    }
   });
   return User;
 };
