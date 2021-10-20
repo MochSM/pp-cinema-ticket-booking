@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Money Heyy",
+        "genre": "action",
+        "pgRating": "R",
+        "posterUrl": "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2021/09/17/3804759000.jpg",
+        "synopsis": "Serial La Casa De Papel atau lebih dikenal dengan Money Heist adalah film yang menceritakan perampokan terbesar dalam sejarah Spanyol. Tayang di Netflix, Money Heist memasuki season kelima yang akan tayang pada Rabu, 10 November 2021.",
+        "releaseDate": "10/11/2021"
+    },
+    {
+        "title": "Black Wadaw",
+        "genre": "action",
+        "pgRating": "G",
+        "posterUrl": "https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWI4ZGItMGI2MjI0N2Q3YmIwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
+        "synopsis": "Black Wadaw adalah film pahlawan super Amerika Serikat tahun 2021 yang didasarkan dari karakter Marvel Comics bernama sama. Film ini diproduksi Marvel Studios dan disalurkan Walt Disney Studios Motion Pictures.",
+        "releaseDate": "04/10/2021"
+    },
+    {
+        "title": "Bucin",
+        "genre": "drama",
+        "pgRating": "G",
+        "posterUrl": "https://file.indonesianfilmcenter.com/uploads/2021-01/bucin-poster.jpg",
+        "synopsis": "Merasa bahwa mereka bucin, Jovial (29) mendaftarkan adiknya, Andovi (25), dan teman- temannya , Tommy (24) dan Chandra (26), untuk mengikuti kursus anti-bucin. Tujuan kursus ini adalah untuk mengajarkan cara memiliki hubungan yang sehat dan tidak hanya menguntungkan satu pihak.",
+        "releaseDate": "26/03/2021"
+    },
+    {
+        "title": "AstorKid",
+        "genre": "fiksi",
+        "pgRating": "PG",
+        "posterUrl": "https://i2.wp.com/www.thecraggus.com/wp-content/uploads/2020/06/astro-kid-1.jpg?fit=1500%2C2222&ssl=1",
+        "synopsis": "Saat umur 6 tahun, Willy terpisah dari orang tuanya saat hujan meteor mengenai pesawat jelajah angkasa yang mereka tumpangi. Kapsul cadangan Willy membawanya ke planet liar dan belum pernah dijelajahi.",
+        "releaseDate": "15/09/2021"
+    }
+]
