@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const socketPort = 8000;
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // view engine
 app.set("view engine", "ejs");
