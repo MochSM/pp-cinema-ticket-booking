@@ -4,7 +4,7 @@ const sessions = require('express-session');
 const HomeController = require('./controllers/homeController')
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 // view engine
 app.set('view engine', 'ejs')
