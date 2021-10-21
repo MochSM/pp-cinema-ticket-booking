@@ -13,6 +13,7 @@
                 <th scope="col">Movies Title</th>
                 <th scope="col">Movies Genre</th>
                 <th scope="col">PG Rating</th>
+                <th scope="col">Price Ticket</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -23,6 +24,7 @@
                 <td><%= el.title %></td>
                 <td><%= el.genre %></td>
                 <td><%= el.pgRating %></td>
+                <td><%= el.price %></td>
                 <td>
                     <a href="/movies/<%= el.id %>/edit" type="button" class="btn btn-success">Edit</a>
                     <a href="/movies/<%= el.id %>/delete" type="button" class="btn btn-danger">Delete</button>
