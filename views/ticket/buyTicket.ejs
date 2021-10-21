@@ -45,9 +45,9 @@
     <div class="col-6">
       <form method="POST" action="/tickets/buyticket/<%=data.id%>" class="m-auto">
         <% if(error) { %> <div class="alert alert-danger" role="alert"><%=error%></div> <% } %>
-        <% if(message) { %> <div class="alert alert-success" role="alert">Register success, you can login now! </div> <% } %>
         <div class="row">
           <%- include('../components/form/form-input', {type: 'hidden', label: '', name: 'UserId', value: user.id}) %>
+          <%- include('../components/form/form-input', {type: 'hidden', label: '', name: 'MovieId', value: data.id}) %>
           <div class="col-5">
             <%- include('../components/form/form-select', {label: 'Date', name: 'date', data: ['20-10-2021', '21-10-2021', '22-10-2021', '23-10-2021', '24-10-2021'], dataObjectType: false, value: false}) %>
           </div>
