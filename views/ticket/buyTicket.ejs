@@ -1,16 +1,44 @@
 <%- include('../components/header', {title: 'Buy Ticket'}); %>
 <%- include('../components/navbar', { user }) %>
-<div class="container">
+<div class="container mb-5">
   <div class="p-3 pb-md-4 mx-auto text-center">
     <h1 class="display-4 fw-normal">Buy Ticket</h1>
     <p class="fs-5 text-muted"><%=data.title%></p>
   </div>
+
+  <div class="row">
+    <div class="card mb-3 p-0">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="<%=data.posterUrl%>" class="card-img-top mx-auto" alt="<%=data.name%>">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title"><%=data.title%></h5>
+            <p class="card-text"><%=data.synopsis%></p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="row">
     <div class="col-6">
-      <div class="card w-75 mx-auto border-0">
-        <img src="<%=data.posterUrl%>" class="card-img-top w-75 mx-auto" alt="<%=data.name%>">
-        <div class="card-body">
-          <p class="card-text"><%=data.synopsis%></p>
+      <div class="card">
+        <div class="card-header">
+          Chat Room
+        </div>
+        <ul id="messages" class="list-group list-group-flush overflow-auto" style="max-height: 450px; min-height: 350px;">
+        </ul>
+        <div class="card-body p-0">
+          <form action="">
+            <input id="username" type="hidden" autocomplete="off" placeholder="username" value="<%=user.id%>"  />
+            <div class="input-group">
+              <input type="text" class="form-control border-0" id="m" autocomplete="off" placeholder="message..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <button class="input-group-text border-0" id="basic-addon2">send</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -49,4 +77,43 @@
     </div>
   </div>
 </div>
+
+<script src="MAIN_URL:8000/socket.io/socket.io.js"></script>
+<script>
+  const socket = io("MAIN_URL:8000");
+  const form = document.querySelector("form");
+  const messages = document.querySelector("#messages");
+
+  function createMessage(msg) {
+    const li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between"
+    li.innerHTML = `${msg.message} by ${msg.User.username} <small class="text-muted">${msg.createdAt}</small>`;
+    messages.append(li);
+  }
+  function createMessages(msgs) {
+    msgs.forEach(createMessage);
+  }
+
+  fetch("MAIN_URL/messages")
+    .then((res) => res.json())
+    .then(createMessages);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    socket.emit("chat message",
+      JSON.stringify({
+        message: document.querySelector("#m").value,
+        UserId: document.querySelector("#username").value,
+      })
+    );
+    e.target.reset();
+  });
+
+  socket.on("chat message", function (msgs) {
+    console.log(msgs);
+    messages.innerHTML = "";
+    createMessages(msgs);
+  });
+</script>
+
 <%- include('../components/footer') %>
