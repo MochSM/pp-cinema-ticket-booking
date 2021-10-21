@@ -24,8 +24,8 @@ class ChatRoomController {
   }
 
   static createSocketMessage(messageObj) {
-    const { message, UserId } = messageObj;
-    const params = { message, UserId, MovieId: 1 };
+    const { message, MovieId, UserId } = messageObj;
+    const params = { message, UserId, MovieId };
 
     return new Promise((resolve, reject) => {
       ChatRoom.create(params)
