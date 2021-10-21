@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
 const { Movie } = require("../models");
 const { formatDate } = require("../helpers/dateFormatter");
+const formatMonetary = require("../helpers/monetaryFormatter")
 
 class HomeController {
   static readMovie(req, res) {
@@ -15,7 +16,7 @@ class HomeController {
       where: filterQuery,
       order : [['id']]
     })
-      .then((data) => res.render("home", { data, user:req.session.user, formatDate }))
+      .then((data) => res.render("home", { data, user:req.session.user, formatDate, formatMonetary }))
       .catch((err) => res.send(err.message));
   }
 
