@@ -47,8 +47,12 @@ class TicketController {
     const { MovieId } = req.params;
     const dateParams = (date && time) ? `${date.split('-')},${time.split(':')}`.split(",") : ''
     const showTime = dateParams ? new Date(dateParams[2], dateParams[1], dateParams[0], dateParams[3], dateParams[4]) : ''
-    const params = { UserId, MovieId, seatNumber: seatNumber ? seatNumber : '', price: 50000, showTime }
-    Ticket.create(params)
+    const params = { UserId, MovieId, seatNumber: seatNumber ? seatNumber : '', showTime }
+    Movie.findOne({ where: { id:MovieId } })
+      .then((data) => {
+        params.price = data.price ? data.price : 0
+        return Ticket.create(params)
+      })
       .then(() => res.redirect("/tickets"))
       .catch((err) => res.redirect(`/tickets/buyticket/${MovieId}?error=${err.message.split('\n').map(el => el.replace("Validation error: ", "")).join(".")}`));
   }
