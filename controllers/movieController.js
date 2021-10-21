@@ -3,7 +3,9 @@ const {Movie} = require("../models")
 
 class movieController {
     static readMovie(req,res){
-        Movie.findAll()
+        Movie.findAll({
+            order: [['createdAt','DESC']]
+        })
         .then((data)=>{res.render('movies/showMovies', {data, user:req.session.user })})
         .catch((err)=>{res.send(err.message)})
     }
