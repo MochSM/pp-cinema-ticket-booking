@@ -1,0 +1,52 @@
+<%- include('../components/header', {title: 'Buy Ticket'}); %>
+<%- include('../components/navbar', { loggedIn }) %>
+<div class="container">
+  <div class="p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Buy Ticket</h1>
+    <p class="fs-5 text-muted"><%=data.title%></p>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="card w-75 mx-auto border-0">
+        <img src="<%=data.posterUrl%>" class="card-img-top w-75 mx-auto" alt="<%=data.name%>">
+        <div class="card-body">
+          <p class="card-text"><%=data.synopsis%></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <form method="POST" action="/tickets/buyticket/<%=data.id%>" class="m-auto">
+        <% if(error) { %> <div class="alert alert-danger" role="alert"><%=error%></div> <% } %>
+        <% if(message) { %> <div class="alert alert-success" role="alert">Register success, you can login now! </div> <% } %>
+        <div class="row">
+          <%- include('../components/form/form-input', {type: 'hidden', label: '', name: 'UserId', value: loggedIn}) %>
+          <div class="col-5">
+            <%- include('../components/form/form-select', {label: 'Date', name: 'date', data: ['20-10-2021', '21-10-2021', '22-10-2021', '23-10-2021', '24-10-2021'], dataObjectType: false, value: false}) %>
+          </div>
+          <div class="col-5">
+            <%- include('../components/form/form-select', {label: 'Time', name: 'time', data: ['11:35', '14:50', '18:05'], dataObjectType: false, value: false}) %>
+          </div>
+        </div>
+        <!-- type -->
+        <!-- price populated dari movie -->
+        <div class="mb-3">
+          <label for="password" class="col-form-label text-center">Choose seat</label>
+          <% bookedSeat.forEach((rowSeat, i) => { %>
+          <div class="btn-toolbar d-flex justify-content-between mb-2" role="toolbar" aria-label="Basic radio toggle button group">
+            <% let rowCode = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] 
+               rowSeat.forEach((colSeat, j) => { 
+                  let seat = rowCode[i] + (j+1) %>
+                  <div class="btn-group me-2 px-1 flex-grow" role="group" aria-label="Second group">
+                    <input type="radio" class="btn-check" name="seatNumber" id="seatNumber<%=seat%>" value="<%=seat%>" autocomplete="off" <%= colSeat == seat ? 'disabled' : ''%>>
+                    <label class="btn btn-<%= colSeat !== seat ? 'outline-' : ''%>warning" for="seatNumber<%=seat%>"><%=seat%></label>
+                  </div>
+            <% }) %>
+            </div>
+          <% }) %>
+        </div>
+        <input type="submit" value="Book Ticket" class="btn btn-primary d-flex m-auto" />
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../components/footer') %>
