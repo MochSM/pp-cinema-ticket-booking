@@ -4,7 +4,7 @@ const movieController = require('../controllers/movieController')
 
 // session middleware
 router.use((req, res, next) => {
-  req.session.user?.id && (req.session.role == 'admin') ? next() : res.redirect('/')
+  req.session.user?.id && (req.session.user?.role == 'admin') ? next() : res.redirect('/')
 })
 
 router.get('/', movieController.readMovie)
