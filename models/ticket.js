@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const formatDateForm = require("../helpers/dateFormatter");
+const { formatDate } = require("../helpers/dateFormatter");
 
 module.exports = (sequelize, DataTypes) => {
   class Ticket extends Model {
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Ticket',
     hooks: {
       beforeCreate: (instance) => {
-        instance.ticketNumber = instance.seatNumber + instance.MovieId.padStart(5, "0") + formatDateForm(instance.showTime).split("-").join("");
+        instance.ticketNumber = instance.seatNumber + instance.MovieId.padStart(5, "0") + formatDate(instance.showTime).split("-").join("");
         instance.ticketType = 'Pro'
       },
     }
