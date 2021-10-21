@@ -26,10 +26,10 @@ class ChatRoomController {
   static createSocketMessage(messageObj) {
     const { message, UserId } = messageObj;
     const params = { message, UserId, MovieId: 1 };
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       ChatRoom.create(params)
         .then((data) => resolve(data.dataValues))
-        .catch((err) => res.send(err));
+        .catch((err) => reject(err));
     });
   }
 }
