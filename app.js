@@ -8,7 +8,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
+const port = 3000;
 
 // view engine
 app.set("view engine", "ejs");
@@ -20,7 +21,7 @@ const server = app.listen(port, () => console.log(`App running on port ${port}.`
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "MAIN_URL",
+    origin: "https://pp-cinema-ticket-booking.herokuapp.com",
     methods: ["GET", "POST"],
   },
 });
@@ -63,7 +64,8 @@ io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     console.log("masuk controller", msg);
     ChatRoomController.createSocketMessage(JSON.parse(msg))
-      .then((_) => {
+      .then(() => {
+        console.log("sukses input");
         emitMostRecentMessges();
       })
       .catch((err) => io.emit(err));
