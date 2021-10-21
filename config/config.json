@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "pp_cinema_db",
-    "host": "127.0.0.1",
+    "username": "jnykkotmnwnvdj",
+    "password": "ecb055f8fde1c135865c740d5367c8715d76341bdaca0aebc3bfae01272f60ef",
+    "database": "d62p7r5k34bu1s",
+    "host": "ec2-54-147-93-73.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
