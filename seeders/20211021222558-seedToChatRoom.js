@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("ChatRooms", [
       {
-        MovieId: 1,
+        MovieId: 10,
         UserId: 1,
         message: "Film nya keren",
         createdAt: new Date(),
