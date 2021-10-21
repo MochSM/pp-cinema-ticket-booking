@@ -6,7 +6,6 @@ const HomeController = require("./controllers/homeController");
 // requirement for socketio
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const socketPort = 8000;
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -17,8 +16,8 @@ app.set("view engine", "ejs");
 // cookie parser middleware
 app.use(cookieParser());
 
-const { emit } = require("process"); // SEEMS NOT USED
-const server = require("http").createServer(app);
+const server = app.listen(port, () => console.log(`App running on port ${port}.`));
+
 const io = require("socket.io")(server, {
   cors: {
     origin: "MAIN_URL",
@@ -75,10 +74,3 @@ io.on("connection", (socket) => {
     console.log("user disconnected");
   });
 });
-
-// Displays in terminal which port the socketPort is running on
-server.listen(socketPort, () => {
-  console.log(`listening on *:${socketPort}`);
-});
-
-app.listen(port, () => console.log(`App running on port ${port}.`));
