@@ -8,8 +8,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-// const port = process.env.PORT || 8080;
-const port = 3000;
+const port = process.env.PORT || 8080;
+// const port = 3000;
 
 // view engine
 app.set("view engine", "ejs");
