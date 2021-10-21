@@ -1,14 +1,27 @@
 const express = require("express");
+const router = require('./routers');
+const sessions = require('express-session');
+const HomeController = require('./controllers/homeController')
 
 const app = express();
 const port = 3000;
 
+// view engine
 app.set('view engine', 'ejs')
 
-app.use(express.urlencoded({ extended: true }))
+//session middleware
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    resave: false
+}));
 
-app.get('/', (req, res) => { res.send('Working As')})
+// parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => {
-  console.log("Listening on port : " + port);
-});
+app.get('/', HomeController.readMovie );
+app.use('/', router)
+
+app.listen(port, () => console.log(`App running on port ${port}.`));
