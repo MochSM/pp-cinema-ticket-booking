@@ -57,12 +57,11 @@ class movieController {
 
     static destroyMovie(req,res){
         let id = req.params.movieId
-        console.log(id)
-        Movie.destroyMovie({ where: { id: id}})
-         .then((data) => {res.redirect('/movies')})
+        // console.log(id)
+        Movie.destroy({ where: { id: id}})
+         .then(() => {res.redirect('/movies')})
          .catch((err)=>{res.send(err)})
     }
-
 }
 
 module.exports = movieController
