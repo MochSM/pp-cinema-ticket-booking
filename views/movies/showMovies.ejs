@@ -24,7 +24,7 @@
                 <td><%= el.title %></td>
                 <td><%= el.genre %></td>
                 <td><%= el.pgRating %></td>
-                <td><%= el.price %></td>
+                <td><%= formatMonetary(el.price) %></td>
                 <td>
                     <a href="/movies/<%= el.id %>/edit" type="button" class="btn btn-success">Edit</a>
                     <a href="/movies/<%= el.id %>/delete" type="button" class="btn btn-danger">Delete</button>

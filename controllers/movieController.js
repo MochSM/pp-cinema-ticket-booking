@@ -1,12 +1,12 @@
 const {Movie} = require("../models")
-
+const formatMonetary = require("../helpers/monetaryFormatter")
 
 class movieController {
     static readMovie(req,res){
         Movie.findAll({
             order: [['createdAt','DESC']]
         })
-        .then((data)=>{res.render('movies/showMovies', {data, user:req.session.user })})
+        .then((data)=>{res.render('movies/showMovies', {data, user:req.session.user, formatMonetary })})
         .catch((err)=>{res.send(err.message)})
     }
 
