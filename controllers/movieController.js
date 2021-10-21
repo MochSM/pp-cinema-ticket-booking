@@ -15,7 +15,7 @@ class movieController {
     }
     
     static postCreateFormMovie(req, res){
-        console.log (req.body)
+     
         let newMovies = {
             title: req.body.title,
             posterUrl: req.body.posterURL,
@@ -23,10 +23,11 @@ class movieController {
             genre: req.body.genre,
             synopsis: req.body.synopsis,
             releaseDate: req.body.date,
+            price: +req.body.price,
             createdAt: new Date(),
             updatedAt: new Date()
         };
-
+        console.log(newMovies)
         Movie.create(newMovies)
         .then((data) => {res.redirect('/movies')})
         .catch((err) => {res.send(err)})
@@ -49,6 +50,7 @@ class movieController {
             genre: req.body.genre,
             synopsis: req.body.synopsis,
             releaseDate: req.body.date,
+            price: +req.body.price,
             createdAt: new Date(),
             updatedAt: new Date()
         }
