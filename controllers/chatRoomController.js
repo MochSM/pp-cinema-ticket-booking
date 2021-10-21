@@ -27,16 +27,10 @@ class ChatRoomController {
     const { message, UserId } = messageObj;
     const params = { message, UserId, MovieId: 1 };
 
-    console.log(messageObj, params, " inside create method");
     return new Promise((resolve, reject) => {
       ChatRoom.create(params)
-        .then((data) => {
-          console.log("resolved");
-          resolve(data.dataValues)})
-        .catch((err) => {
-          console.log("rejecttt", err);
-          reject(err)
-        });
+        .then((data) => resolve(data.dataValues))
+        .catch((err) => reject(err));
     });
   }
 }
