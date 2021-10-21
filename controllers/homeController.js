@@ -15,7 +15,7 @@ class HomeController {
       where: filterQuery,
       order : [['id']]
     })
-      .then((data) => res.render("home", { data, loggedIn:req.session.userId, user:req.session, formatDate }))
+      .then((data) => res.render("home", { data, user:req.session.user, formatDate }))
       .catch((err) => res.send(err.message));
   }
 

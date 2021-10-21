@@ -7,7 +7,7 @@ router.get("/logout", UserController.logout);
 
 // session middleware
 router.use((req, res, next) => {
-  req.session.userId ? res.redirect('/') : next()
+  req.session.user?.id ? res.redirect('/') : next()
 })
 
 router.get("/register", UserController.getRegisterForm);

@@ -4,12 +4,12 @@ const {Movie} = require("../models")
 class movieController {
     static readMovie(req,res){
         Movie.findAll()
-        .then((data)=>{res.render('movies/showMovies', {data, loggedIn:false})})
+        .then((data)=>{res.render('movies/showMovies', {data, user:req.session.user })})
         .catch((err)=>{res.send(err.message)})
     }
 
     static createFormMovie(req, res){
-        res.render('movies/formAddMovie', {loggedIn:false})
+        res.render('movies/formAddMovie', {user:req.session.user })
     }
     
     static postCreateFormMovie(req, res){
@@ -33,7 +33,7 @@ class movieController {
     static editFormMovie(req, res){
         let id = req.params.movieId
         Movie.findByPk(id)
-        .then((data) => {res.render('movies/formEditMovies', {data, loggedIn:false})})
+        .then((data) => {res.render('movies/formEditMovies', {data, user:req.session.user })})
         .catch((err)=> res.send(err))
     }
 

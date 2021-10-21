@@ -4,7 +4,7 @@ const TicketController = require("../controllers/ticketController");
 
 // session middleware
 router.use((req, res, next) => {
-  !req.session.userId ? res.redirect('/auth/login') : next()
+  !req.session.user?.id ? res.redirect('/auth/login') : next()
 })
 
 router.get("/", TicketController.listTickets);

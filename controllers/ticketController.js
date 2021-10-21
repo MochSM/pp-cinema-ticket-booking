@@ -4,10 +4,10 @@ const { formatDate, formatTime} = require("../helpers/dateFormatter")
 
 class TicketController {
   static listTickets(req, res) {
-    const params = { UserId: req.session.userId }
+    const params = { UserId: req.session.user?.id }
     const { message } = req.query
     Ticket.findAll({ where: params, include: 'Movie'})
-      .then((data) => res.render("ticket/listTicket", { data, message, loggedIn:req.session.userId, user:req.session, formatMonetary, formatDate, formatTime }))
+      .then((data) => res.render("ticket/listTicket", { data, message, user:req.session.user, formatMonetary, formatDate, formatTime }))
       .catch((err) => res.send(err));
   }
 
@@ -37,7 +37,7 @@ class TicketController {
           }
           bookedSeat.push(temp)
         }
-        res.render("ticket/buyTicket", { data, message, error, bookedSeat, loggedIn:req.session.userId, user:req.session, });
+        res.render("ticket/buyTicket", { data, message, error, bookedSeat, user:req.session.user });
       })
       .catch((err) => res.send(err));
   }
@@ -55,7 +55,7 @@ class TicketController {
 
   static destroyTicket(req, res) {
     const { ticketId } = req.params
-    const params = { id: ticketId, UserId: req.session.userId }
+    const params = { id: ticketId, UserId: req.session.user?.id }
     Ticket.findOne({ where: params })
       .then((data) => {
         const message = `Ticket with number ${data.ticketNumber} was canceled!`
