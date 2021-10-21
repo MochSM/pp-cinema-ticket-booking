@@ -4,12 +4,12 @@ const {Movie} = require("../models")
 class movieController {
     static readMovie(req,res){
         Movie.findAll()
-        .then((data)=>{res.render('showMovies', {data, loggedIn:false})})
+        .then((data)=>{res.render('movies/showMovies', {data, loggedIn:false})})
         .catch((err)=>{res.send(err.message)})
     }
 
     static createFormMovie(req, res){
-        res.render('formAddMovie', {loggedIn:false})
+        res.render('movies/formAddMovie', {loggedIn:false})
     }
     
     static postCreateFormMovie(req, res){
@@ -26,27 +26,41 @@ class movieController {
         };
 
         Movie.create(newMovies)
-        .then((data) => {res.redirect('showMovies')})
+        .then((data) => {res.redirect('/movies')})
         .catch((err) => {res.send(err)})
     }
     
     static editFormMovie(req, res){
         let id = req.params.movieId
         Movie.findByPk(id)
-        .then((data) => {res.render('formEditMovies', {data, loggedIn:false})})
+        .then((data) => {res.render('movies/formEditMovies', {data, loggedIn:false})})
         .catch((err)=> res.send(err))
     }
 
     static postEditFormMovie(req,res){
-
+        console.log (req.body)
+        let id = req.params.movieId
+        let newMovies = {
+            title: req.body.title,
+            posterUrl: req.body.posterURL,
+            pgRating: req.body.pgRating,
+            genre: req.body.genre,
+            synopsis: req.body.synopsis,
+            releaseDate: req.body.date,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+        Movie.update(newMovies, {where: {id:id}})
+        .then((data)=>{res.redirect('/movies')})
+        .catch((err)=>{res.send(err)})
     }
 
     static destroyMovie(req,res){
-        // let id = req.params.movieId
-        // console.log(id)
-        // Movie.destroyMovie({ where: { id: id}})
-        //  .then((data) => {res.redirect()})
-        //  .catch((err)=>{res.send(err)})
+        let id = req.params.movieId
+        console.log(id)
+        Movie.destroyMovie({ where: { id: id}})
+         .then((data) => {res.redirect('/movies')})
+         .catch((err)=>{res.send(err)})
     }
 
 }
