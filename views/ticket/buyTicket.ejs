@@ -78,9 +78,9 @@
   </div>
 </div>
 
-<script src="MAIN_URL:8000/socket.io/socket.io.js"></script>
+<script src="https://pp-cinema-ticket-booking.herokuapp.com:8000/socket.io/socket.io.js"></script>
 <script>
-  const socket = io("MAIN_URL:8000");
+  const socket = io("https://pp-cinema-ticket-booking.herokuapp.com:8000");
   const form = document.querySelector("form");
   const messages = document.querySelector("#messages");
 
@@ -94,7 +94,7 @@
     msgs.forEach(createMessage);
   }
 
-  fetch("MAIN_URL/messages")
+  fetch("https://pp-cinema-ticket-booking.herokuapp.com/messages")
     .then((res) => res.json())
     .then(createMessages);
 
