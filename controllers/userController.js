@@ -5,7 +5,7 @@ const { User } = require("../models/");
 class UserController {
   static getRegisterForm(req, res) {
     const { error } = req.query;
-    res.render("auth/registerForm", { error, loggedIn: false });
+    res.render("auth/registerForm", { error, user: false });
   }
 
   static postRegisterForm(req, res) {
@@ -18,7 +18,7 @@ class UserController {
 
   static getLoginForm(req, res) {
     const { message, error } = req.query;
-    res.render("auth/loginForm", { message, error, loggedIn: false });
+    res.render("auth/loginForm", { message, error, user: false });
   }
 
   static postLoginForm(req, res) {
@@ -29,8 +29,8 @@ class UserController {
         if(! bcrypt.compareSync(password, data.password)) res.redirect(`/auth/login?error=username or password was incorrect`);
         else {
           let session = req.session;
-          session.userId = data.id;
-          session.username = data.username;
+          const { id, username, role } = data;
+          session.user = { id, username, role };
           res.redirect("/");
         }
       })

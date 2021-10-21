@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const movieController = require('../controllers/movieController')
 
+// session middleware
+router.use((req, res, next) => {
+  req.session.user?.id && (req.session.role == 'admin') ? next() : res.redirect('/')
+})
 
 router.get('/', movieController.readMovie)
 router.get('/add', movieController.createFormMovie)
