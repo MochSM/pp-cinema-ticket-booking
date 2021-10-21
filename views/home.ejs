@@ -29,7 +29,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Genre : <%=movie.genre%></li>
           <li class="list-group-item">Rating : <%=movie.pgRating%></li>
-          <li class="list-group-item">Price :  <%=movie.price%></li>
+          <li class="list-group-item">Price :  <%=formatMonetary(movie.price)%></li>
           <li class="list-group-item">Release Date : <%=formatDate(movie.releaseDate)%></li>
         </ul>
         <div class="card-body">
