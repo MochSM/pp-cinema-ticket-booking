@@ -53,7 +53,7 @@ const emitMostRecentMessges = () => {
     .then((result) => {
       io.emit("chat message", result);
     })
-    .catch(console.log);
+    .catch(console.log("error"));
 };
 
 // connects, creates message, and emits top 10 messages
