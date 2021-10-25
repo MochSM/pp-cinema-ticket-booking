@@ -63,9 +63,9 @@ class TicketController {
     Ticket.findOne({ where: params })
       .then((data) => {
         const message = `Ticket with number ${data.ticketNumber} was canceled!`
-        Ticket.destroy({ where: params })
-        .then(() => res.redirect(`/tickets/?message=${message}`))
+        return Ticket.destroy({ where: params })
       })
+      .then(() => res.redirect(`/tickets/?message=${message}`))
       .catch((err) => res.send(err));
   }
 }
